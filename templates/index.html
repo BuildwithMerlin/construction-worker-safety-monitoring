@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Worker Safety Monitoring System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo-img">
+                <span class="logo-text">Construction Worker Safety Monitoring System</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button active" data-section="dashboard">Dashboard</button>
+                </li>
+
+                <li class="nav-item">
+                    <button class="nav-button" data-section="live-monitor">Live Monitor</button>
+                </li>
+
+                <li class="nav-item">
+                    <button class="nav-button" data-section="alerts">Alerts</button>
+                </li>
+
+                <li class="nav-item">
+                    <button class="nav-button" data-section="reports">Reports</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Background HUD Grid for Futuristic Feel -->
+        <div class="hud-grid"></div>
+
+        <!-- ===== DASHBOARD SECTION ===== -->
+        <section id="dashboard" class="section active">
+            <div class="section-header">
+                <h1>Dashboard</h1>
+                <p>Real-time Safety Overview</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- PPE Compliance Score Card -->
+                <div class="card card-animated">
+                    <div class="card-header">
+                        <h3>PPE Compliance Score</h3>
+                        <span class="card-icon">🛡️</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="score-display">
+                            <div class="score-circle">
+                                <svg class="score-ring" width="150" height="150">
+                                    <circle class="score-ring-circle" stroke="rgba(255, 255, 255, 0.1)"
+                                        fill="transparent" stroke-width="8" r="66" cx="75" cy="75" />
+                                    <circle class="score-ring-circle-fill" stroke="#00ff88" fill="transparent"
+                                        stroke-width="8" r="66" cx="75" cy="75" stroke-dasharray="414"
+                                        stroke-dashoffset="0" />
+                                </svg>
+                                <div class="score-text">
+                                    <span class="score-value" id="ppe-score">100</span>
+                                    <span class="score-unit">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p>Workers complying with PPE requirements</p>
+                    </div>
+                </div>
+
+                <!-- AI Safety Score Card -->
+                <div class="card card-animated">
+                    <div class="card-header">
+                        <h3>AI Safety Score</h3>
+                        <span class="card-icon">🤖</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="score-display">
+                            <div class="score-circle">
+                                <svg class="score-ring" width="150" height="150">
+                                    <circle class="score-ring-circle" stroke="rgba(255, 255, 255, 0.1)"
+                                        fill="transparent" stroke-width="8" r="66" cx="75" cy="75" />
+                                    <circle class="score-ring-circle-fill" stroke="#00d4ff" fill="transparent"
+                                        stroke-width="8" r="66" cx="75" cy="75" stroke-dasharray="414"
+                                        stroke-dashoffset="0" />
+                                </svg>
+                                <div class="score-text">
+                                    <span class="score-value" id="ai-score">100</span>
+                                    <span class="score-unit">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p>Overall site safety assessment</p>
+                    </div>
+                </div>
+
+                <!-- Active Alerts Card -->
+                <div class="card card-animated">
+                    <div class="card-header">
+                        <h3>Active Alerts</h3>
+                        <span class="card-icon">⚠️</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert-count">
+                            <span class="alert-number" id="alert-count">0</span>
+                            <span class="alert-label">Violations Detected</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p>Last 24 hours</p>
+                    </div>
+                </div>
+
+                <!-- System Status Card -->
+                <div class="card card-animated">
+                    <div class="card-header">
+                        <h3>System Status</h3>
+                        <span class="card-icon">✅</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="status-info">
+                            <div class="status-item">
+                                <span class="status-label">Camera Feed:</span>
+                                <span class="status-value status-active" id="camera-status">Active</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">AI Model:</span>
+                                <span class="status-value status-active" id="model-status">Running</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Voice Alerts:</span>
+                                <span class="status-value status-active" id="voice-status">Enabled</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p>All systems operational</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="statistics-section">
+                <h2>Detection Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Total Persons Detected</div>
+                        <div class="stat-value" id="total-persons">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Helmets Detected</div>
+                        <div class="stat-value" id="helmets-count">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Masks Detected</div>
+                        <div class="stat-value" id="masks-count">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Safety Vests Detected</div>
+                        <div class="stat-value" id="vests-count">0</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== LIVE MONITOR SECTION ===== -->
+        <section id="live-monitor" class="section">
+            <div class="section-header">
+                <h1>Live Monitor</h1>
+                <p>Real-time Camera Feed with AI Detection</p>
+            </div>
+
+            <div class="live-monitor-container">
+                <div class="video-container">
+                    <img id="video-feed" src="{{ url_for('video_feed') }}" alt="Live Camera Feed" class="video-feed">
+                    <div class="video-overlay">
+                        <div class="recording-indicator">
+                            <span class="recording-dot"></span>
+                            <span class="recording-text">LIVE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-stats-panel">
+                    <div class="live-stat-item">
+                        <span class="live-stat-label">PPE Compliance</span>
+                        <span class="live-stat-value" id="live-ppe-score">100%</span>
+                    </div>
+                    <div class="live-stat-item">
+                        <span class="live-stat-label">AI Safety</span>
+                        <span class="live-stat-value" id="live-ai-score">100%</span>
+                    </div>
+                    <div class="live-stat-item">
+                        <span class="live-stat-label">Total Alerts</span>
+                        <span class="live-stat-value" id="live-alert-count">0</span>
+                    </div>
+                    <div class="live-stat-item">
+                        <span class="live-stat-label">Status</span>
+                        <span class="live-stat-value status-indicator">🟢 Active</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ALERTS SECTION ===== -->
+        <section id="alerts" class="section">
+            <div class="section-header">
+                <h1>Alerts</h1>
+                <p>PPE Violation History and Incidents</p>
+            </div>
+
+            <div class="alerts-container">
+                <div class="alerts-controls">
+                    <button class="btn-clear-alerts" id="clear-alerts-btn">Clear All Alerts</button>
+                </div>
+
+                <div class="alerts-list" id="alerts-list">
+                    <div class="no-alerts-message">
+                        <p>No violations detected. All workers are compliant with PPE requirements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== REPORTS SECTION ===== -->
+        <section id="reports" class="section">
+            <div class="section-header">
+                <h1>Reports</h1>
+                <p>Safety Compliance and Analytics</p>
+            </div>
+
+            <div class="reports-container">
+                <div class="report-section">
+                    <h2>Compliance Summary</h2>
+                    <div class="compliance-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">PPE Compliance Score</span>
+                            <span class="summary-value" id="avg-ppe-compliance">100%</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">AI Safety Score</span>
+                            <span class="summary-value" id="avg-ai-safety">100%</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Total Violations</span>
+                            <span class="summary-value" id="total-violations">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Monitoring Duration</span>
+                            <span class="summary-value" id="monitoring-duration">0h 0m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-section">
+                    <h2>Violation Breakdown</h2>
+                    <div class="violation-breakdown">
+                        <div class="violation-item">
+                            <span class="violation-type">No Helmet</span>
+                            <span class="violation-count" id="no-helmet-count">0</span>
+                        </div>
+                        <div class="violation-item">
+                            <span class="violation-type">No Mask</span>
+                            <span class="violation-count" id="no-mask-count">0</span>
+                        </div>
+                        <div class="violation-item">
+                            <span class="violation-type">No Safety Vest</span>
+                            <span class="violation-count" id="no-vest-count">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-section">
+                    <h2>Export Options</h2>
+                    <div class="export-buttons">
+                        <button class="btn-export" id="export-pdf-btn">📄 Export as PDF</button>
+                        <button class="btn-export" id="export-csv-btn">📊 Export as CSV</button>
+                        <button class="btn-export" id="export-json-btn">📋 Export as JSON</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

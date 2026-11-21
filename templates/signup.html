@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Safety AI | Create Account</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body class="login-page">
+
+
+    <div class="construction-scene">
+
+        <div class="sky-glow"></div>
+
+        <div class="moon"></div>
+
+
+        <div class="building building-a">
+            <i></i><i></i><i></i>
+            <i></i><i></i><i></i>
+            <i></i><i></i>
+        </div>
+
+
+        <div class="building building-b">
+            <i></i><i></i><i></i>
+            <i></i><i></i><i></i>
+        </div>
+
+
+        <div class="crane">
+
+            <div class="crane-mast"></div>
+
+            <div class="crane-arm"></div>
+
+            <div class="crane-cable"></div>
+
+            <div class="crane-hook"></div>
+
+        </div>
+
+
+        <div class="worker worker-one">
+            <span class="helmet"></span>
+            <span class="head"></span>
+            <span class="body"></span>
+            <span class="arm arm-left"></span>
+            <span class="arm arm-right"></span>
+            <span class="leg leg-left"></span>
+            <span class="leg leg-right"></span>
+        </div>
+
+
+        <div class="worker worker-two">
+            <span class="helmet"></span>
+            <span class="head"></span>
+            <span class="body"></span>
+            <span class="arm arm-left"></span>
+            <span class="arm arm-right"></span>
+            <span class="leg leg-left"></span>
+            <span class="leg leg-right"></span>
+        </div>
+
+
+        <div class="worker worker-three">
+            <span class="helmet"></span>
+            <span class="head"></span>
+            <span class="body"></span>
+            <span class="arm arm-left"></span>
+            <span class="arm arm-right"></span>
+            <span class="leg leg-left"></span>
+            <span class="leg leg-right"></span>
+        </div>
+
+
+        <div class="dust dust-one"></div>
+        <div class="dust dust-two"></div>
+        <div class="dust dust-three"></div>
+
+        <div class="ground"></div>
+
+        <div class="scan-line"></div>
+
+    </div>
+
+
+    <main class="login-shell">
+
+        <section class="login-card signup-card">
+
+
+            <div class="login-logo">
+                🦺
+            </div>
+
+
+            <div class="login-kicker">
+                AI CONSTRUCTION SAFETY
+            </div>
+
+
+            <h1>
+                Create Account
+            </h1>
+
+
+            <p class="login-subtitle">
+                Create your secure safety monitoring account
+            </p>
+
+
+            {% if error %}
+
+            <div class="login-error">
+                ⚠ {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <form method="POST" action="{{ url_for('signup') }}" class="login-form">
+
+
+                <label for="username">
+                    USERNAME
+                </label>
+
+                <input id="username" name="username" type="text" placeholder="Create username" required autofocus>
+
+
+                <label for="password">
+                    PASSWORD
+                </label>
+
+                <input id="password" name="password" type="password" placeholder="Create password" required>
+
+
+                <label for="confirm_password">
+                    CONFIRM PASSWORD
+                </label>
+
+                <input id="confirm_password" name="confirm_password" type="password" placeholder="Confirm password"
+                    required>
+
+
+                <button type="submit" class="login-button">
+
+                    <span>
+                        CREATE ACCOUNT
+                    </span>
+
+                    <b>
+                        →
+                    </b>
+
+                </button>
+
+
+            </form>
+
+
+            <div class="signup-link">
+
+                Already have an account?
+
+                <a href="{{ url_for('login') }}">
+                    Sign In
+                </a>
+
+            </div>
+
+
+            <div class="login-status">
+
+                <span class="status-dot"></span>
+
+                SECURE ACCOUNT SYSTEM ONLINE
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+</body>
+
+</html>

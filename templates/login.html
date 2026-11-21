@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Safety AI | Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body class="login-page">
+
+
+    <!-- =========================================================
+     ANIMATED CONSTRUCTION SITE BACKGROUND
+     ========================================================= -->
+
+    <div class="construction-scene">
+
+        <!-- Night sky -->
+
+        <div class="construction-sky"></div>
+
+        <div class="stars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+
+        <!-- Moon -->
+
+        <div class="construction-moon"></div>
+
+
+        <!-- Distant buildings -->
+
+        <div class="site-building building-one">
+
+            <div class="building-top"></div>
+
+            <div class="building-floor"></div>
+            <div class="building-floor"></div>
+            <div class="building-floor"></div>
+            <div class="building-floor"></div>
+            <div class="building-floor"></div>
+
+        </div>
+
+
+        <div class="site-building building-two">
+
+            <div class="building-floor"></div>
+            <div class="building-floor"></div>
+            <div class="building-floor"></div>
+            <div class="building-floor"></div>
+
+        </div>
+
+
+        <!-- =====================================================
+         LARGE TOWER CRANE
+         ===================================================== -->
+
+        <div class="tower-crane">
+
+            <div class="crane-tower">
+
+                <div class="tower-section"></div>
+                <div class="tower-section"></div>
+                <div class="tower-section"></div>
+                <div class="tower-section"></div>
+
+            </div>
+
+
+            <div class="crane-top">
+
+                <div class="crane-cabin"></div>
+
+                <div class="crane-boom">
+
+                    <div class="crane-counterweight"></div>
+
+                    <div class="crane-trolley"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Hanging load -->
+
+            <div class="crane-rope">
+
+                <div class="crane-load">
+                    ▦
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+         CONSTRUCTION WORKER 1
+         ===================================================== -->
+
+        <div class="construction-worker worker-left">
+
+            <div class="worker-helmet"></div>
+
+            <div class="worker-head"></div>
+
+            <div class="worker-body">
+
+                <div class="worker-vest"></div>
+
+            </div>
+
+            <div class="worker-arm worker-arm-left"></div>
+
+            <div class="worker-arm worker-arm-right"></div>
+
+            <div class="worker-leg worker-leg-left"></div>
+
+            <div class="worker-leg worker-leg-right"></div>
+
+            <div class="worker-tool"></div>
+
+        </div>
+
+
+        <!-- =====================================================
+         CONSTRUCTION WORKER 2
+         ===================================================== -->
+
+        <div class="construction-worker worker-center">
+
+            <div class="worker-helmet"></div>
+
+            <div class="worker-head"></div>
+
+            <div class="worker-body">
+
+                <div class="worker-vest"></div>
+
+            </div>
+
+            <div class="worker-arm worker-arm-left"></div>
+
+            <div class="worker-arm worker-arm-right"></div>
+
+            <div class="worker-leg worker-leg-left"></div>
+
+            <div class="worker-leg worker-leg-right"></div>
+
+            <div class="worker-tool"></div>
+
+        </div>
+
+
+        <!-- =====================================================
+         CONSTRUCTION WORKER 3
+         ===================================================== -->
+
+        <div class="construction-worker worker-right">
+
+            <div class="worker-helmet"></div>
+
+            <div class="worker-head"></div>
+
+            <div class="worker-body">
+
+                <div class="worker-vest"></div>
+
+            </div>
+
+            <div class="worker-arm worker-arm-left"></div>
+
+            <div class="worker-arm worker-arm-right"></div>
+
+            <div class="worker-leg worker-leg-left"></div>
+
+            <div class="worker-leg worker-leg-right"></div>
+
+            <div class="worker-tool"></div>
+
+        </div>
+
+
+        <!-- =====================================================
+         SAFETY BARRIERS
+         ===================================================== -->
+
+        <div class="safety-barrier barrier-one">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+
+        <div class="safety-barrier barrier-two">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+
+        <!-- Warning lights -->
+
+        <div class="warning-light light-one"></div>
+
+        <div class="warning-light light-two"></div>
+
+
+        <!-- Dust particles -->
+
+        <div class="construction-dust dust-one"></div>
+
+        <div class="construction-dust dust-two"></div>
+
+        <div class="construction-dust dust-three"></div>
+
+        <div class="construction-dust dust-four"></div>
+
+        <div class="construction-dust dust-five"></div>
+
+
+        <!-- Ground -->
+
+        <div class="construction-ground">
+
+            <div class="ground-line"></div>
+
+        </div>
+
+
+        <!-- Cinematic overlay -->
+
+        <div class="construction-vignette"></div>
+
+        <div class="construction-scan"></div>
+
+    </div>
+
+    <!-- =========================================================
+     LOGIN
+     ========================================================= -->
+
+    <main class="login-shell">
+
+        <section class="login-card">
+
+
+            <div class="login-logo">
+                🦺
+            </div>
+
+
+            <div class="login-kicker">
+                AI CONSTRUCTION SAFETY
+            </div>
+
+
+            <h1>
+                Welcome Back
+            </h1>
+
+
+            <p class="login-subtitle">
+                Sign in to access the live safety monitoring dashboard
+            </p>
+
+
+            {% if error %}
+
+            <div class="login-error">
+                ⚠ {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <form method="POST" action="{{ url_for('login') }}" class="login-form">
+
+
+                <label for="username">
+                    USERNAME
+                </label>
+
+                <input id="username" name="username" type="text" placeholder="Enter your username"
+                    autocomplete="username" required autofocus>
+
+
+                <label for="password">
+                    PASSWORD
+                </label>
+
+
+                <div class="password-wrap">
+
+                    <input id="password" name="password" type="password" placeholder="Enter your password"
+                        autocomplete="current-password" required>
+
+                    <button type="button" id="toggle-password" class="password-toggle">
+                        👁
+                    </button>
+
+                </div>
+
+
+                <button type="submit" class="login-button">
+
+                    <span>
+                        SIGN IN
+                    </span>
+
+                    <b>
+                        →
+                    </b>
+
+                </button>
+
+
+            </form>
+
+
+            <!-- SIGN UP -->
+
+            <div class="signup-link">
+
+                Don't have an account?
+
+                <a href="{{ url_for('signup') }}">
+                    Create Account
+                </a>
+
+            </div>
+
+
+            <div class="demo-credentials">
+
+                <span>
+                    DEMO ACCOUNT
+                </span>
+
+                <strong>
+                    admin / admin123
+                </strong>
+
+            </div>
+
+
+            <div class="login-status">
+
+                <span class="status-dot"></span>
+
+                AI SAFETY SYSTEM ONLINE
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const password =
+            document.getElementById("password");
+
+        const toggle =
+            document.getElementById("toggle-password");
+
+
+        toggle.addEventListener(
+            "click",
+            function () {
+
+                if (password.type === "password") {
+
+                    password.type = "text";
+
+                    toggle.textContent = "🙈";
+
+                } else {
+
+                    password.type = "password";
+
+                    toggle.textContent = "👁";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

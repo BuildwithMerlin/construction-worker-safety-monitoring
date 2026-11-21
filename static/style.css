@@ -1,0 +1,4366 @@
+/* ===== GLOBAL STYLES ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Futuristic Color Palette */
+    --primary-bg: #020617;
+    --secondary-bg: rgba(15, 23, 42, 0.8);
+    /* Glassmorphism base */
+    --tertiary-bg: rgba(30, 41, 59, 0.6);
+    --accent-green: #10b981;
+    --accent-cyan: #06b6d4;
+    --accent-red: #ef4444;
+    --accent-orange: #f59e0b;
+    --neon-glow: 0 0 15px rgba(6, 182, 212, 0.5);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+
+    /* Fonts */
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-mono: 'Courier New', monospace;
+
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-primary);
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+/* ===== NAVBAR ===== */
+
+.navbar {
+    background-color: var(--secondary-bg);
+    border-bottom: 2px solid var(--border-color);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 255, 136, 0.1);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--accent-green);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.logo-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    background-color: var(--tertiary-bg);
+    padding: 6px;
+    border: 2px solid var(--accent-green);
+}
+
+.logo-text {
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+    font-size: 1rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+
+.nav-item {
+    margin: 0;
+}
+
+.nav-button {
+    background-color: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.6rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-button:hover {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.nav-button.active {
+    background-color: var(--accent-green);
+    border-color: var(--accent-green);
+    color: var(--primary-bg);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+/* ===== MAIN CONTAINER ===== */
+
+.main-container {
+
+    width: 100%;
+
+    height: calc(100vh - 80px);
+
+    overflow: hidden;
+
+    padding: 20px;
+
+    background: #020617;
+
+}
+
+/* HUD Grid Background */
+.hud-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.hud-grid::after {
+    display: none;
+}
+
+/* Scrollbar Styling */
+.main-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-container::-webkit-scrollbar-track {
+    background: var(--secondary-bg);
+}
+
+.main-container::-webkit-scrollbar-thumb {
+    background: var(--accent-green);
+    border-radius: 5px;
+}
+
+.main-container::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-cyan);
+}
+
+/* ===== SECTIONS ===== */
+
+.section {
+
+    display: none;
+
+    width: 100%;
+
+    height: 100%;
+
+    animation: fadeIn .35s ease;
+
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.section-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* ===== DASHBOARD SECTION ===== */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* ===== CARDS ===== */
+
+.card {
+
+    background: #1e293b;
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    transition: .3s;
+
+    position: relative;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .35);
+
+}
+
+.card:hover {
+
+    transform: translateY(-3px);
+
+    border-color: #06b6d4;
+
+    box-shadow: 0 0 18px rgba(6, 182, 212, .35);
+
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+    transition: left 0.5s ease;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.card-animated {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.card-animated:hover {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+    transform: translateY(-5px);
+}
+
+.card-animated:hover::before {
+    left: 100%;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h3 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-icon {
+    font-size: 2rem;
+}
+
+.card-body {
+    margin-bottom: 1rem;
+}
+
+.card-footer {
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.card-footer p {
+    margin: 0;
+}
+
+/* ===== SCORE DISPLAY ===== */
+
+.score-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.score-circle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.score-ring {
+    transform: rotate(-90deg);
+}
+
+.score-ring-circle {
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.score-ring-circle-fill {
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--accent-green);
+}
+
+.score-unit {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* ===== ALERT COUNT ===== */
+
+.alert-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.alert-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--accent-red);
+    text-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+}
+
+.alert-label {
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* ===== STATUS INFO ===== */
+
+.status-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: rgba(0, 255, 136, 0.05);
+    border-radius: 6px;
+    border-left: 3px solid var(--accent-green);
+}
+
+.status-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.status-value {
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.status-active {
+    color: var(--accent-green);
+}
+
+/* ===== STATISTICS SECTION ===== */
+
+.statistics-section {
+    margin-top: 3rem;
+}
+
+.statistics-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-box {
+
+    background: #111827;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    transition: .3s;
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+}
+
+.stat-box:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--accent-green);
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+/* ===== LIVE MONITOR SECTION ===== */
+
+.live-monitor-container {
+
+    display: grid;
+
+    grid-template-columns: 4fr 1fr;
+
+    gap: 20px;
+
+    height: 72vh;
+
+}
+
+.video-container {
+
+    position: relative;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    background: #111827;
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    box-shadow: 0 0 20px rgba(6, 182, 212, .25);
+
+}
+
+.video-feed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.recording-indicator {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 2px solid var(--accent-red);
+}
+
+.recording-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent-red);
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.recording-text {
+    color: var(--accent-red);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.live-stats-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: linear-gradient(135deg, var(--secondary-bg), var(--tertiary-bg));
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+.live-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(0, 255, 136, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-green);
+}
+
+.live-stat-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.live-stat-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent-green);
+}
+
+.status-indicator {
+    color: var(--accent-green);
+    font-size: 1.2rem;
+}
+
+/* ===== ALERTS SECTION ===== */
+
+.alerts-container {
+    background: linear-gradient(135deg, var(--secondary-bg), var(--tertiary-bg));
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.alerts-controls {
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-clear-alerts {
+    background-color: var(--accent-red);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-clear-alerts:hover {
+    background-color: #ff1a4d;
+    box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+}
+
+.alerts-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.alerts-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.alerts-list::-webkit-scrollbar-track {
+    background: var(--secondary-bg);
+}
+
+.alerts-list::-webkit-scrollbar-thumb {
+    background: var(--accent-red);
+    border-radius: 4px;
+}
+
+.no-alerts-message {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-secondary);
+}
+
+.no-alerts-message p {
+    font-size: 1.1rem;
+}
+
+.alert-item {
+    background-color: rgba(255, 51, 102, 0.1);
+    border-left: 4px solid var(--accent-red);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.alert-item:hover {
+    background-color: rgba(255, 51, 102, 0.15);
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.2);
+}
+
+.alert-item-content {
+    flex: 1;
+}
+
+.alert-time {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}
+
+.alert-violation {
+    color: var(--accent-red);
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.alert-item-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    margin-left: 1rem;
+    border: 2px solid var(--accent-red);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.alert-item-image:hover {
+    transform: scale(1.1);
+}
+
+/* ===== REPORTS SECTION ===== */
+
+.reports-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.report-section {
+    background: linear-gradient(135deg, var(--secondary-bg), var(--tertiary-bg));
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.report-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.compliance-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.summary-item {
+    background-color: rgba(0, 255, 136, 0.05);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.summary-item:hover {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.summary-label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.summary-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-green);
+}
+
+.violation-breakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.violation-item {
+    background-color: rgba(255, 51, 102, 0.05);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.violation-item:hover {
+    border-color: var(--accent-red);
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.2);
+}
+
+.violation-type {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.violation-count {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent-red);
+}
+
+.export-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.btn-export {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+    border: none;
+    color: var(--primary-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-export:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+}
+
+.btn-export:active {
+    transform: translateY(-1px);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 1024px) {
+    .live-monitor-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .live-stats-panel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .live-stat-item {
+        padding: 0.75rem;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-container {
+        padding: 0 1rem;
+    }
+
+    .nav-menu {
+        gap: 0.5rem;
+    }
+
+    .nav-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .main-container {
+        padding: 1rem;
+        height: calc(100vh - 70px);
+    }
+
+    .section-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .live-stats-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .compliance-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .violation-breakdown {
+        grid-template-columns: 1fr;
+    }
+
+    .export-buttons {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-logo {
+        gap: 0.5rem;
+    }
+
+    .logo-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logo-text {
+        font-size: 1.1rem;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        gap: 0.3rem;
+    }
+
+    .nav-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    .section-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-header h3 {
+        font-size: 1rem;
+    }
+
+    .score-value {
+        font-size: 2rem;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+    }
+}
+
+/* Utility Classes */
+
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block !important;
+}
+
+/* ============================================================
+   CONSTRUCTION SAFETY AI - LOGIN PAGE
+   ============================================================ */
+
+.login-page {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #071017;
+    color: #ffffff;
+}
+
+
+/* ============================================================
+   CONSTRUCTION SCENE
+   ============================================================ */
+
+.construction-scene {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background:
+        linear-gradient(180deg,
+            #07131c 0%,
+            #102633 52%,
+            #172a31 100%);
+    z-index: 0;
+}
+
+
+/* Atmospheric glow */
+
+.construction-scene::before {
+    content: "";
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    top: -280px;
+    right: -150px;
+
+    background: radial-gradient(circle,
+            rgba(255, 184, 76, 0.18),
+            transparent 68%);
+
+    animation: skyGlow 6s ease-in-out infinite alternate;
+}
+
+
+/* ============================================================
+   SKY
+   ============================================================ */
+
+.scene-sky {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 75% 25%,
+            rgba(255, 190, 80, 0.13),
+            transparent 20%);
+}
+
+
+/* ============================================================
+   BUILDINGS
+   ============================================================ */
+
+.building {
+    position: absolute;
+    bottom: 18%;
+    background: #17242b;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+        inset 0 0 35px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(0, 0, 0, 0.25);
+}
+
+.building-one {
+    left: 4%;
+    width: 23%;
+    height: 47%;
+}
+
+.building-two {
+    right: 3%;
+    width: 25%;
+    height: 57%;
+}
+
+
+/* Floors */
+
+.building-floor {
+    height: 25%;
+    margin: 0 8%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    position: relative;
+}
+
+
+/* Building windows */
+
+.building-floor::after {
+    content: "";
+    position: absolute;
+
+    width: 12px;
+    height: 7px;
+
+    top: 35%;
+    left: 18%;
+
+    background: rgba(255, 190, 80, 0.55);
+
+    box-shadow:
+        45px 0 rgba(255, 190, 80, 0.35),
+        90px 0 rgba(255, 190, 80, 0.25),
+        135px 0 rgba(255, 190, 80, 0.45);
+
+    animation: buildingLights 3s infinite alternate;
+}
+
+
+/* ============================================================
+   CRANE
+   ============================================================ */
+
+.crane {
+    position: absolute;
+
+    left: 36%;
+    top: 5%;
+
+    width: 47%;
+    height: 76%;
+
+    opacity: 0.75;
+
+    animation: craneFloat 5s ease-in-out infinite;
+}
+
+
+/* Crane tower */
+
+.crane-tower {
+    position: absolute;
+
+    left: 17%;
+    bottom: 9%;
+
+    width: 9%;
+    height: 77%;
+
+    border-left: 5px solid #d49b45;
+    border-right: 5px solid #d49b45;
+}
+
+
+/* Tower cross sections */
+
+.crane-cross {
+    position: absolute;
+
+    left: -1px;
+
+    width: calc(100% + 2px);
+    height: 3px;
+
+    background: #d49b45;
+
+    transform: rotate(45deg);
+}
+
+.crane-cross:nth-child(1) {
+    top: 18%;
+}
+
+.crane-cross:nth-child(2) {
+    top: 45%;
+}
+
+.crane-cross:nth-child(3) {
+    top: 72%;
+}
+
+
+/* Crane arm */
+
+.crane-arm {
+    position: absolute;
+
+    left: 20%;
+    top: 9%;
+
+    width: 70%;
+    height: 5px;
+
+    background: #d49b45;
+
+    box-shadow:
+        0 0 8px rgba(212, 155, 69, 0.35);
+}
+
+
+/* Counterweight */
+
+.crane-arm::before {
+    content: "";
+
+    position: absolute;
+
+    left: -45px;
+    top: -5px;
+
+    width: 55px;
+    height: 15px;
+
+    background: #9b7337;
+}
+
+
+/* Crane cable */
+
+.crane-cable {
+    position: absolute;
+
+    right: 18%;
+    top: 4px;
+
+    width: 2px;
+    height: 145px;
+
+    background: rgba(230, 230, 230, 0.65);
+
+    transform-origin: top center;
+
+    animation: cableSwing 3s ease-in-out infinite;
+}
+
+
+/* Hook */
+
+.crane-hook {
+    position: absolute;
+
+    right: calc(18% - 5px);
+    top: 145px;
+
+    width: 15px;
+    height: 25px;
+
+    border-left: 3px solid #c7c7c7;
+    border-bottom: 3px solid #c7c7c7;
+
+    border-radius: 0 0 10px 10px;
+
+    animation: hookSwing 3s ease-in-out infinite;
+}
+
+
+/* ============================================================
+   WORKERS
+   ============================================================ */
+
+.worker {
+    position: absolute;
+
+    width: 55px;
+    height: 125px;
+
+    bottom: 18%;
+
+    transform-origin: bottom center;
+
+    animation:
+        workerMove 2.5s ease-in-out infinite;
+}
+
+
+/* Worker positions */
+
+.worker-one {
+    left: 32%;
+    animation-delay: 0s;
+}
+
+.worker-two {
+    left: 51%;
+    transform: scale(0.9);
+    animation-delay: 0.7s;
+}
+
+.worker-three {
+    right: 26%;
+    transform: scale(0.78);
+    animation-delay: 1.3s;
+}
+
+
+/* Head */
+
+.worker-head {
+    position: absolute;
+
+    width: 22px;
+    height: 22px;
+
+    top: 0;
+    left: 17px;
+
+    border-radius: 50%;
+
+    background: #14191c;
+
+    border: 2px solid rgba(255, 194, 88, 0.55);
+}
+
+
+/* Helmet */
+
+.worker-head::before {
+    content: "";
+
+    position: absolute;
+
+    width: 28px;
+    height: 8px;
+
+    left: -5px;
+    top: -4px;
+
+    border-radius: 12px 12px 3px 3px;
+
+    background: #e2a342;
+
+    box-shadow:
+        0 0 10px rgba(226, 163, 66, 0.25);
+}
+
+
+/* Body */
+
+.worker-body {
+    position: absolute;
+
+    width: 32px;
+    height: 48px;
+
+    top: 25px;
+    left: 12px;
+
+    background: #27363c;
+
+    border-radius: 5px;
+
+    border-left: 3px solid #d89c3e;
+    border-right: 3px solid #d89c3e;
+}
+
+
+/* Safety vest */
+
+.worker-body::after {
+    content: "";
+
+    position: absolute;
+
+    width: 4px;
+    height: 44px;
+
+    left: 12px;
+    top: 2px;
+
+    background: #e1a440;
+}
+
+
+/* Legs */
+
+.worker-leg {
+    position: absolute;
+
+    width: 9px;
+    height: 48px;
+
+    top: 70px;
+
+    background: #11191d;
+
+    border-radius: 3px;
+}
+
+.worker-leg.left {
+    left: 14px;
+
+    transform-origin: top;
+    animation: legLeft 1.2s ease-in-out infinite;
+}
+
+.worker-leg.right {
+    right: 14px;
+
+    transform-origin: top;
+    animation: legRight 1.2s ease-in-out infinite;
+}
+
+
+/* Arms */
+
+.worker-arm {
+    position: absolute;
+
+    width: 8px;
+    height: 43px;
+
+    top: 28px;
+
+    background: #182126;
+
+    border-radius: 4px;
+
+    transform-origin: top;
+}
+
+.worker-arm.left {
+    left: 6px;
+
+    transform: rotate(18deg);
+
+    animation: armLeft 1.6s ease-in-out infinite;
+}
+
+.worker-arm.right {
+    right: 6px;
+
+    transform: rotate(-20deg);
+
+    animation: armRight 1.8s ease-in-out infinite;
+}
+
+
+/* ============================================================
+   CONSTRUCTION MATERIALS
+   ============================================================ */
+
+.material {
+    position: absolute;
+
+    bottom: 18%;
+
+    background: #7c5b32;
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.35);
+}
+
+.material-one {
+    left: 27%;
+    width: 95px;
+    height: 18px;
+
+    transform: rotate(-8deg);
+}
+
+.material-two {
+    left: 59%;
+    width: 75px;
+    height: 16px;
+
+    transform: rotate(6deg);
+}
+
+.material-three {
+    right: 16%;
+    width: 100px;
+    height: 20px;
+
+    transform: rotate(-4deg);
+}
+
+
+/* ============================================================
+   GROUND
+   ============================================================ */
+
+.construction-ground {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 18%;
+
+    background:
+        linear-gradient(180deg,
+            #263033,
+            #11191d);
+
+    border-top: 2px solid rgba(220, 166, 75, 0.35);
+
+    box-shadow:
+        inset 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Ground construction lines */
+
+.construction-ground::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 35%;
+
+    height: 2px;
+
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(218, 165, 72, 0.35) 0 40px,
+            transparent 40px 80px);
+}
+
+
+/* ============================================================
+   DUST PARTICLES
+   ============================================================ */
+
+.dust {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: rgba(210, 180, 125, 0.4);
+
+    bottom: 22%;
+
+    animation: dustMove 5s linear infinite;
+}
+
+.dust-one {
+    left: 30%;
+    animation-delay: 0s;
+}
+
+.dust-two {
+    left: 42%;
+    animation-delay: 1s;
+}
+
+.dust-three {
+    left: 55%;
+    animation-delay: 2s;
+}
+
+.dust-four {
+    left: 65%;
+    animation-delay: 3s;
+}
+
+.dust-five {
+    left: 75%;
+    animation-delay: 4s;
+}
+
+
+/* ============================================================
+   AI SCANNING LINE
+   ============================================================ */
+
+.ai-scan-line {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: -10px;
+
+    height: 2px;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(255, 190, 70, 0.65),
+            transparent);
+
+    box-shadow:
+        0 0 15px rgba(255, 190, 70, 0.4);
+
+    animation: scanLine 7s linear infinite;
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   DARK OVERLAY
+   ============================================================ */
+
+.construction-scene::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(90deg,
+            rgba(3, 8, 12, 0.80) 0%,
+            rgba(3, 8, 12, 0.48) 45%,
+            rgba(3, 8, 12, 0.72) 100%);
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   LOGIN CONTAINER
+   ============================================================ */
+
+.login-container {
+    position: relative;
+
+    z-index: 10;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    padding: 40px 9%;
+}
+
+
+/* ============================================================
+   LOGIN CARD
+   ============================================================ */
+
+.login-card {
+    width: 420px;
+
+    padding: 38px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(145deg,
+            rgba(18, 30, 37, 0.94),
+            rgba(7, 16, 22, 0.91));
+
+    border:
+        1px solid rgba(255, 191, 78, 0.28);
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.65),
+        inset 0 0 35px rgba(255, 180, 70, 0.025);
+
+    backdrop-filter: blur(18px);
+
+    animation: loginCardAppear 0.8s ease-out;
+}
+
+
+/* ============================================================
+   LOGIN LOGO
+   ============================================================ */
+
+.login-logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 32px;
+}
+
+.logo-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    color: #111;
+
+    background:
+        linear-gradient(135deg,
+            #ffc45b,
+            #d58d26);
+
+    box-shadow:
+        0 0 25px rgba(255, 183, 67, 0.2);
+}
+
+.login-logo h1 {
+    margin: 0;
+
+    font-size: 25px;
+
+    letter-spacing: 2px;
+}
+
+.login-logo h1 span {
+    color: #ffbd52;
+}
+
+.login-logo p {
+    margin: 4px 0 0;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: #80909a;
+}
+
+
+/* ============================================================
+   HEADING
+   ============================================================ */
+
+.login-heading h2 {
+    margin: 0;
+
+    font-size: 28px;
+
+    letter-spacing: 0.5px;
+}
+
+.login-heading p {
+    margin: 8px 0 25px;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    color: #91a1aa;
+}
+
+
+/* ============================================================
+   ERROR
+   ============================================================ */
+
+.login-error {
+    padding: 12px 14px;
+
+    margin-bottom: 18px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    color: #ffd6d6;
+
+    background: rgba(180, 45, 45, 0.18);
+
+    border:
+        1px solid rgba(255, 80, 80, 0.35);
+}
+
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+
+.input-group {
+    margin-bottom: 19px;
+}
+
+.input-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color: #9daab1;
+}
+
+.input-wrapper {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+
+    left: 15px;
+
+    font-size: 14px;
+
+    opacity: 0.65;
+
+    z-index: 2;
+}
+
+.input-wrapper input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 45px;
+
+    border-radius: 9px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.09);
+
+    outline: none;
+
+    background:
+        rgba(3, 10, 14, 0.72);
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    transition:
+        border 0.25s,
+        box-shadow 0.25s,
+        background 0.25s;
+}
+
+.input-wrapper input::placeholder {
+    color: #53636c;
+}
+
+.input-wrapper input:focus {
+    border-color:
+        rgba(255, 188, 77, 0.65);
+
+    background:
+        rgba(7, 17, 23, 0.9);
+
+    box-shadow:
+        0 0 0 3px rgba(255, 188, 77, 0.08);
+}
+
+
+/* Password toggle */
+
+.password-toggle {
+    position: absolute;
+
+    right: 10px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #91a0a8;
+
+    cursor: pointer;
+
+    padding: 7px;
+
+    font-size: 14px;
+}
+
+.password-toggle:hover {
+    color: #ffbf55;
+}
+
+
+/* ============================================================
+   LOGIN BUTTON
+   ============================================================ */
+
+.login-button {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+    padding: 15px 18px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    color: #151515;
+
+    background:
+        linear-gradient(135deg,
+            #ffc75c,
+            #dd9229);
+
+    box-shadow:
+        0 8px 25px rgba(220, 148, 39, 0.18);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(220, 148, 39, 0.3);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.button-arrow {
+    font-size: 19px;
+
+    transition:
+        transform 0.2s;
+}
+
+.login-button:hover .button-arrow {
+    transform: translateX(5px);
+}
+
+.login-button.loading {
+    opacity: 0.7;
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   DEMO ACCESS
+   ============================================================ */
+
+.demo-login {
+    margin-top: 22px;
+
+    padding: 12px;
+
+    text-align: center;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.05);
+
+    font-size: 10px;
+
+    color: #687982;
+}
+
+.demo-login>span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    color: #9b7a42;
+}
+
+.demo-login strong {
+    color: #c5d0d5;
+
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   SYSTEM STATUS
+   ============================================================ */
+
+.login-status {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 20px;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    color: #718089;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #63d28a;
+
+    box-shadow:
+        0 0 10px rgba(99, 210, 138, 0.8);
+
+    animation: statusPulse 1.5s infinite;
+}
+
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes workerMove {
+
+    0%,
+    100% {
+        margin-bottom: 0;
+    }
+
+    50% {
+        margin-bottom: 3px;
+    }
+}
+
+@keyframes legLeft {
+
+    0%,
+    100% {
+        transform: rotate(2deg);
+    }
+
+    50% {
+        transform: rotate(-7deg);
+    }
+}
+
+@keyframes legRight {
+
+    0%,
+    100% {
+        transform: rotate(-2deg);
+    }
+
+    50% {
+        transform: rotate(7deg);
+    }
+}
+
+@keyframes armLeft {
+
+    0%,
+    100% {
+        transform: rotate(18deg);
+    }
+
+    50% {
+        transform: rotate(32deg);
+    }
+}
+
+@keyframes armRight {
+
+    0%,
+    100% {
+        transform: rotate(-20deg);
+    }
+
+    50% {
+        transform: rotate(-35deg);
+    }
+}
+
+@keyframes cableSwing {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(4deg);
+    }
+}
+
+@keyframes hookSwing {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(4deg);
+    }
+}
+
+@keyframes craneFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes dustMove {
+
+    0% {
+        transform: translate(0, 0) scale(0.5);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translate(80px, -100px) scale(1.2);
+        opacity: 0;
+    }
+}
+
+@keyframes scanLine {
+
+    0% {
+        top: -5%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.5;
+    }
+
+    90% {
+        opacity: 0.5;
+    }
+
+    100% {
+        top: 105%;
+        opacity: 0;
+    }
+}
+
+@keyframes buildingLights {
+
+    0% {
+        opacity: 0.35;
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes skyGlow {
+
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1.12);
+        opacity: 1;
+    }
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+@keyframes loginCardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateX(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* ============================================================
+   RESPONSIVE LOGIN
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .login-container {
+        justify-content: center;
+
+        padding: 25px;
+    }
+
+    .login-card {
+        width: min(420px, 90vw);
+    }
+
+    .crane {
+        left: 5%;
+        width: 90%;
+    }
+
+    .building-one {
+        opacity: 0.5;
+    }
+
+    .building-two {
+        opacity: 0.5;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .login-container {
+        padding: 15px;
+    }
+
+    .login-card {
+        padding: 28px 22px;
+    }
+
+    .login-heading h2 {
+        font-size: 24px;
+    }
+
+    .worker {
+        transform: scale(0.7);
+    }
+
+    .worker-one {
+        left: 8%;
+    }
+
+    .worker-two {
+        left: 50%;
+    }
+
+    .worker-three {
+        right: 5%;
+    }
+}
+
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .construction-scene *,
+    .login-card {
+        animation: none !important;
+    }
+}
+
+/* ============================================================
+   FINAL LOGIN LAYOUT OVERRIDE
+   ============================================================ */
+
+body.login-page {
+    min-height: 100vh !important;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/* Center the login card */
+
+.login-page .login-container {
+    position: relative;
+    z-index: 20;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 30px !important;
+
+    box-sizing: border-box;
+}
+
+
+/* Make login panel bigger */
+
+.login-page .login-card {
+    width: min(520px, 92vw) !important;
+
+    min-height: 560px;
+
+    padding: 48px 52px !important;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    transform: none;
+}
+
+
+/* Bigger logo */
+
+.login-page .login-logo {
+    justify-content: center;
+
+    margin-bottom: 38px;
+}
+
+.login-page .logo-icon {
+    width: 64px;
+    height: 64px;
+
+    font-size: 18px;
+}
+
+.login-page .login-logo h1 {
+    font-size: 30px;
+}
+
+
+/* Bigger Welcome Back */
+
+.login-page .login-heading {
+    text-align: center;
+}
+
+.login-page .login-heading h2 {
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+.login-page .login-heading p {
+    font-size: 14px;
+
+    margin-bottom: 30px;
+}
+
+
+/* Larger inputs */
+
+.login-page .input-group {
+    margin-bottom: 22px;
+}
+
+.login-page .input-group label {
+    font-size: 11px;
+
+    margin-bottom: 9px;
+}
+
+.login-page .input-wrapper input {
+    height: 52px;
+
+    padding: 14px 48px;
+
+    font-size: 15px;
+}
+
+
+/* Larger login button */
+
+.login-page .login-button {
+    height: 56px;
+
+    margin-top: 14px;
+
+    padding: 0 20px;
+
+    font-size: 12px;
+}
+
+
+/* Demo access */
+
+.login-page .demo-login {
+    margin-top: 24px;
+
+    font-size: 11px;
+}
+
+
+/* System status */
+
+.login-page .login-status {
+    margin-top: 22px;
+
+    font-size: 9px;
+}
+
+
+/* Keep construction background visible */
+
+.login-page .construction-scene {
+    z-index: 0;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .login-page .login-container {
+        padding: 18px !important;
+    }
+
+    .login-page .login-card {
+        width: 94vw !important;
+
+        min-height: auto;
+
+        padding: 35px 25px !important;
+    }
+
+    .login-page .login-heading h2 {
+        font-size: 27px;
+    }
+
+    .login-page .login-logo h1 {
+        font-size: 25px;
+    }
+}
+
+/* ============================================================
+   EMERGENCY FINAL LOGIN FIX
+   ============================================================ */
+
+html,
+body.login-page {
+    width: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body.login-page {
+    min-height: 100vh !important;
+    overflow: hidden !important;
+    background: #071218 !important;
+}
+
+
+/* ---------- BACKGROUND ---------- */
+
+body.login-page .construction-scene {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 0 !important;
+    overflow: hidden !important;
+}
+
+
+/* ---------- LOGIN WRAPPER ---------- */
+
+body.login-page .login-shell {
+    position: fixed !important;
+    inset: 0 !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 30px !important;
+    box-sizing: border-box !important;
+
+    z-index: 100 !important;
+}
+
+
+/* ---------- LOGIN CARD ---------- */
+
+body.login-page .login-card {
+    position: relative !important;
+
+    width: 520px !important;
+    max-width: calc(100vw - 50px) !important;
+
+    min-height: 620px !important;
+
+    margin: 0 auto !important;
+    padding: 48px 55px !important;
+
+    box-sizing: border-box !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+
+    text-align: center !important;
+
+    background:
+        linear-gradient(145deg,
+            rgba(12, 28, 36, 0.97),
+            rgba(3, 12, 18, 0.96)) !important;
+
+    border: 1px solid rgba(255, 190, 70, 0.40) !important;
+
+    border-radius: 24px !important;
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.75),
+        0 0 50px rgba(0, 190, 255, 0.08) !important;
+
+    backdrop-filter: blur(20px) !important;
+
+    z-index: 101 !important;
+}
+
+
+/* ---------- LOGO ---------- */
+
+body.login-page .login-logo {
+    width: 78px !important;
+    height: 78px !important;
+
+    margin: 0 auto 20px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 20px !important;
+
+    font-size: 38px !important;
+
+    background: rgba(255, 190, 70, 0.10) !important;
+
+    border: 1px solid rgba(255, 190, 70, 0.35) !important;
+}
+
+
+/* ---------- TITLE ---------- */
+
+body.login-page .login-kicker {
+    display: block !important;
+
+    margin-bottom: 10px !important;
+
+    font-size: 11px !important;
+
+    font-weight: 800 !important;
+
+    letter-spacing: 3px !important;
+
+    color: #00cfff !important;
+}
+
+
+body.login-page .login-card h1 {
+    display: block !important;
+
+    margin: 0 0 12px 0 !important;
+
+    font-size: 34px !important;
+
+    line-height: 1.2 !important;
+
+    color: #ffffff !important;
+}
+
+
+body.login-page .login-subtitle {
+    display: block !important;
+
+    margin: 0 0 30px 0 !important;
+
+    font-size: 14px !important;
+
+    line-height: 1.6 !important;
+
+    color: #91a5af !important;
+}
+
+
+/* ---------- FORM ---------- */
+
+body.login-page .login-form {
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    width: 100% !important;
+
+    text-align: left !important;
+}
+
+
+body.login-page .login-form label {
+    display: block !important;
+
+    width: 100% !important;
+
+    margin: 0 0 8px 0 !important;
+
+    font-size: 11px !important;
+
+    font-weight: 800 !important;
+
+    letter-spacing: 1.5px !important;
+
+    color: #b9c8cf !important;
+}
+
+
+body.login-page .login-form input {
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 55px !important;
+
+    min-height: 55px !important;
+
+    box-sizing: border-box !important;
+
+    margin: 0 0 18px 0 !important;
+
+    padding: 0 16px !important;
+
+    border: 1px solid rgba(150, 175, 185, 0.25) !important;
+
+    border-radius: 10px !important;
+
+    outline: none !important;
+
+    background: rgba(0, 0, 0, 0.38) !important;
+
+    color: #ffffff !important;
+
+    font-family: "Segoe UI", Arial, sans-serif !important;
+
+    font-size: 15px !important;
+}
+
+
+body.login-page .login-form input::placeholder {
+    color: #687b84 !important;
+}
+
+
+body.login-page .login-form input:focus {
+    border-color: #00cfff !important;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 207, 255, 0.10) !important;
+}
+
+
+/* ---------- PASSWORD ---------- */
+
+body.login-page .password-wrap {
+    position: relative !important;
+
+    width: 100% !important;
+}
+
+
+body.login-page .password-wrap input {
+    padding-right: 55px !important;
+}
+
+
+body.login-page .password-toggle {
+    position: absolute !important;
+
+    right: 7px !important;
+    top: 7px !important;
+
+    width: 42px !important;
+    height: 41px !important;
+
+    margin: 0 !important;
+
+    border: none !important;
+
+    background: transparent !important;
+
+    color: #8ca0aa !important;
+
+    cursor: pointer !important;
+
+    font-size: 16px !important;
+}
+
+
+/* ---------- BUTTON ---------- */
+
+body.login-page .login-button {
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: space-between !important;
+
+    width: 100% !important;
+
+    height: 58px !important;
+
+    min-height: 58px !important;
+
+    margin: 8px 0 0 0 !important;
+
+    padding: 0 20px !important;
+
+    box-sizing: border-box !important;
+
+    border: none !important;
+
+    border-radius: 10px !important;
+
+    background:
+        linear-gradient(90deg,
+            #ffc04f,
+            #e69a25) !important;
+
+    color: #111820 !important;
+
+    font-size: 12px !important;
+
+    font-weight: 900 !important;
+
+    letter-spacing: 1.5px !important;
+
+    cursor: pointer !important;
+
+    box-shadow:
+        0 10px 30px rgba(230, 154, 37, 0.20) !important;
+
+    transition: 0.2s ease !important;
+}
+
+
+body.login-page .login-button:hover {
+    transform: translateY(-2px) !important;
+
+    box-shadow:
+        0 15px 35px rgba(230, 154, 37, 0.35) !important;
+}
+
+
+body.login-page .login-button b {
+    font-size: 22px !important;
+}
+
+
+/* ---------- SIGN UP ---------- */
+
+body.login-page .signup-link {
+    display: block !important;
+
+    margin-top: 25px !important;
+
+    font-size: 13px !important;
+
+    line-height: 1.5 !important;
+
+    color: #879aa4 !important;
+}
+
+
+body.login-page .signup-link a {
+    color: #00cfff !important;
+
+    text-decoration: none !important;
+
+    font-weight: 700 !important;
+}
+
+
+body.login-page .signup-link a:hover {
+    text-decoration: underline !important;
+}
+
+
+/* ---------- DEMO ---------- */
+
+body.login-page .demo-credentials {
+    display: block !important;
+
+    margin-top: 20px !important;
+
+    padding: 12px !important;
+
+    border-radius: 9px !important;
+
+    background: rgba(255, 190, 70, 0.05) !important;
+
+    border: 1px solid rgba(255, 190, 70, 0.15) !important;
+
+    font-size: 11px !important;
+
+    color: #91a5af !important;
+}
+
+
+body.login-page .demo-credentials span {
+    display: block !important;
+
+    margin-bottom: 5px !important;
+
+    font-size: 9px !important;
+
+    letter-spacing: 2px !important;
+
+    color: #c99d4c !important;
+}
+
+
+body.login-page .demo-credentials strong {
+    color: #ffffff !important;
+}
+
+
+/* ---------- STATUS ---------- */
+
+body.login-page .login-status {
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    gap: 7px !important;
+
+    margin-top: 20px !important;
+
+    font-size: 9px !important;
+
+    letter-spacing: 1.5px !important;
+
+    color: #71858e !important;
+}
+
+
+/* ---------- ERROR ---------- */
+
+body.login-page .login-error {
+    display: block !important;
+
+    width: 100% !important;
+
+    box-sizing: border-box !important;
+
+    margin: 0 0 15px 0 !important;
+
+    padding: 12px !important;
+
+    border-radius: 9px !important;
+
+    text-align: left !important;
+
+    font-size: 12px !important;
+
+    color: #ffaaaa !important;
+
+    background: rgba(255, 60, 60, 0.10) !important;
+
+    border: 1px solid rgba(255, 60, 60, 0.25) !important;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 650px) {
+
+    body.login-page .login-shell {
+        padding: 15px !important;
+    }
+
+    body.login-page .login-card {
+        width: 94vw !important;
+
+        max-width: 94vw !important;
+
+        min-height: auto !important;
+
+        padding: 35px 25px !important;
+    }
+
+    body.login-page .login-card h1 {
+        font-size: 28px !important;
+    }
+
+    body.login-page .login-logo {
+        width: 65px !important;
+        height: 65px !important;
+        font-size: 32px !important;
+    }
+
+}
+
+/* ============================================================
+   CINEMATIC CONSTRUCTION SITE ANIMATION
+   ============================================================ */
+
+body.login-page .construction-scene {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    background: #061017 !important;
+    z-index: 0 !important;
+}
+
+
+/* ============================================================
+   SKY
+   ============================================================ */
+
+.construction-sky {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(180deg,
+            #02070b 0%,
+            #07141d 45%,
+            #10232c 72%,
+            #172b30 100%);
+}
+
+
+/* Atmospheric glow */
+
+.construction-sky::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 42%;
+
+    width: 900px;
+    height: 500px;
+
+    transform: translate(-50%, -50%);
+
+    background:
+        radial-gradient(ellipse,
+            rgba(255, 166, 52, 0.10),
+            transparent 65%);
+
+    filter: blur(25px);
+}
+
+
+/* ============================================================
+   STARS
+   ============================================================ */
+
+.stars {
+    position: absolute;
+    inset: 0;
+}
+
+.stars span {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .65);
+
+    animation: starBlink 3s infinite ease-in-out;
+}
+
+.stars span:nth-child(1) {
+    left: 8%;
+    top: 17%;
+}
+
+.stars span:nth-child(2) {
+    left: 21%;
+    top: 10%;
+    animation-delay: .8s;
+}
+
+.stars span:nth-child(3) {
+    left: 38%;
+    top: 20%;
+    animation-delay: 1.4s;
+}
+
+.stars span:nth-child(4) {
+    left: 57%;
+    top: 11%;
+    animation-delay: 2s;
+}
+
+.stars span:nth-child(5) {
+    left: 72%;
+    top: 22%;
+    animation-delay: .5s;
+}
+
+.stars span:nth-child(6) {
+    left: 83%;
+    top: 12%;
+    animation-delay: 1.7s;
+}
+
+.stars span:nth-child(7) {
+    left: 92%;
+    top: 27%;
+    animation-delay: 2.3s;
+}
+
+.stars span:nth-child(8) {
+    left: 47%;
+    top: 7%;
+    animation-delay: 1s;
+}
+
+
+@keyframes starBlink {
+
+    0%,
+    100% {
+        opacity: .25;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+}
+
+
+/* ============================================================
+   MOON
+   ============================================================ */
+
+.construction-moon {
+    position: absolute;
+
+    right: 10%;
+    top: 9%;
+
+    width: 82px;
+    height: 82px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(circle at 35% 35%,
+            #fff,
+            #dce5e7 55%,
+            #a8b9bd);
+
+    box-shadow:
+        0 0 45px rgba(210, 235, 240, .18);
+
+    opacity: .75;
+}
+
+
+/* ============================================================
+   BUILDINGS
+   ============================================================ */
+
+.site-building {
+    position: absolute;
+
+    bottom: 24%;
+
+    background:
+        linear-gradient(90deg,
+            #0b171d,
+            #15252b,
+            #0a151b);
+
+    border:
+        1px solid rgba(130, 160, 170, .16);
+
+    box-shadow:
+        0 -5px 25px rgba(0, 0, 0, .35);
+}
+
+
+.building-one {
+
+    left: 2%;
+
+    width: 210px;
+
+    height: 47%;
+
+}
+
+
+.building-two {
+
+    right: 3%;
+
+    width: 240px;
+
+    height: 38%;
+
+}
+
+
+.building-top {
+
+    position: absolute;
+
+    left: 15%;
+
+    top: -18px;
+
+    width: 70%;
+
+    height: 18px;
+
+    border:
+        1px solid rgba(140, 170, 180, .18);
+
+    background: #101f25;
+}
+
+
+/* Floors */
+
+.building-floor {
+
+    height: 20%;
+
+    border-bottom:
+        1px solid rgba(130, 160, 170, .13);
+
+    position: relative;
+}
+
+
+.building-floor::before,
+.building-floor::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 30%;
+
+    width: 22px;
+
+    height: 10px;
+
+    background:
+        rgba(255, 190, 72, .18);
+
+    box-shadow:
+        0 0 10px rgba(255, 190, 72, .10);
+
+}
+
+
+.building-floor::before {
+    left: 20%;
+}
+
+
+.building-floor::after {
+    right: 20%;
+}
+
+
+/* ============================================================
+   TOWER CRANE
+   ============================================================ */
+
+.tower-crane {
+
+    position: absolute;
+
+    left: 15%;
+
+    top: 3%;
+
+    width: 55%;
+
+    height: 73%;
+
+    z-index: 4;
+}
+
+
+/* Crane tower */
+
+.crane-tower {
+
+    position: absolute;
+
+    left: 18%;
+
+    bottom: 0;
+
+    width: 34px;
+
+    height: 72%;
+
+    border-left:
+        4px solid #78878b;
+
+    border-right:
+        4px solid #78878b;
+}
+
+
+/* Tower cross sections */
+
+.tower-section {
+
+    height: 25%;
+
+    position: relative;
+
+    border-bottom:
+        3px solid #66777b;
+}
+
+
+.tower-section::before,
+.tower-section::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    width: 3px;
+
+    height: 100%;
+
+    background: #66777b;
+
+}
+
+
+.tower-section::before {
+    left: 3px;
+
+    transform: rotate(35deg);
+}
+
+
+.tower-section::after {
+    right: 3px;
+
+    transform: rotate(-35deg);
+}
+
+
+/* Crane top */
+
+.crane-top {
+
+    position: absolute;
+
+    left: 15%;
+
+    top: 4%;
+
+    width: 75%;
+
+    height: 50px;
+}
+
+
+/* Main horizontal boom */
+
+.crane-boom {
+
+    position: absolute;
+
+    left: 0;
+
+    top: 5px;
+
+    width: 100%;
+
+    height: 12px;
+
+    background:
+        linear-gradient(180deg,
+            #a5b1b3,
+            #59686c);
+
+    border-radius: 3px;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, .4);
+}
+
+
+/* Crane lattice */
+
+.crane-boom::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -12px 0;
+
+    background:
+        repeating-linear-gradient(120deg,
+            transparent 0,
+            transparent 17px,
+            rgba(190, 200, 200, .55) 18px,
+            rgba(190, 200, 200, .55) 20px);
+
+    opacity: .55;
+}
+
+
+/* Cabin */
+
+.crane-cabin {
+
+    position: absolute;
+
+    left: 12%;
+
+    top: 15px;
+
+    width: 48px;
+
+    height: 35px;
+
+    background:
+        linear-gradient(135deg,
+            #263a40,
+            #0d1c22);
+
+    border:
+        2px solid #718286;
+
+    z-index: 2;
+}
+
+
+.crane-cabin::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 6px;
+
+    top: 6px;
+
+    width: 32px;
+
+    height: 14px;
+
+    background:
+        rgba(0, 190, 230, .28);
+
+    border:
+        1px solid rgba(0, 210, 255, .45);
+}
+
+
+/* Counterweight */
+
+.crane-counterweight {
+
+    position: absolute;
+
+    right: -15px;
+
+    top: -8px;
+
+    width: 45px;
+
+    height: 25px;
+
+    background: #49575a;
+
+    border-radius: 3px;
+}
+
+
+/* Moving trolley */
+
+.crane-trolley {
+
+    position: absolute;
+
+    top: -5px;
+
+    left: 55%;
+
+    width: 22px;
+
+    height: 22px;
+
+    background: #d5a33f;
+
+    border-radius: 4px;
+
+    animation:
+        trolleyMove 7s ease-in-out infinite alternate;
+}
+
+
+@keyframes trolleyMove {
+
+    from {
+        left: 45%;
+    }
+
+    to {
+        left: 78%;
+    }
+
+}
+
+
+/* Rope */
+
+.crane-rope {
+
+    position: absolute;
+
+    left: 72%;
+
+    top: 38px;
+
+    width: 2px;
+
+    height: 170px;
+
+    background: #c2c7c7;
+
+    transform-origin: top;
+
+    animation:
+        loadSwing 3.5s ease-in-out infinite;
+}
+
+
+/* Hook/load */
+
+.crane-load {
+
+    position: absolute;
+
+    left: -17px;
+
+    bottom: -22px;
+
+    width: 36px;
+
+    height: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(135deg,
+            #e6ad36,
+            #9d6c16);
+
+    color: #2a2110;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    border:
+        2px solid #6f531b;
+
+    box-shadow:
+        0 7px 15px rgba(0, 0, 0, .35);
+}
+
+
+@keyframes loadSwing {
+
+    0%,
+    100% {
+        transform: rotate(-2deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+
+}
+
+
+/* ============================================================
+   WORKERS
+   ============================================================ */
+
+.construction-worker {
+
+    position: absolute;
+
+    width: 70px;
+
+    height: 170px;
+
+    bottom: 20%;
+
+    z-index: 8;
+
+    filter:
+        drop-shadow(0 8px 12px rgba(0, 0, 0, .5));
+
+    animation:
+        workerBob 2.5s ease-in-out infinite;
+}
+
+
+/* Worker positions */
+
+.worker-left {
+
+    left: 17%;
+
+    transform: scale(1.05);
+
+}
+
+
+.worker-center {
+
+    left: 43%;
+
+    bottom: 21%;
+
+    transform: scale(1.2);
+
+    animation-delay: .6s;
+
+}
+
+
+.worker-right {
+
+    right: 15%;
+
+    transform: scale(.95);
+
+    animation-delay: 1.1s;
+
+}
+
+
+@keyframes workerBob {
+
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -5px;
+    }
+
+}
+
+
+/* Head */
+
+.worker-head {
+
+    position: absolute;
+
+    top: 28px;
+
+    left: 22px;
+
+    width: 28px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    background:
+        #b47750;
+}
+
+
+/* Helmet */
+
+.worker-helmet {
+
+    position: absolute;
+
+    top: 19px;
+
+    left: 17px;
+
+    width: 38px;
+
+    height: 17px;
+
+    border-radius:
+        22px 22px 7px 7px;
+
+    background:
+        linear-gradient(180deg,
+            #ffd45a,
+            #c68c1d);
+
+    border:
+        2px solid #80601d;
+
+    z-index: 3;
+}
+
+
+.worker-helmet::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: -5px;
+
+    bottom: -4px;
+
+    width: 48px;
+
+    height: 5px;
+
+    border-radius: 5px;
+
+    background: #c48b1f;
+}
+
+
+/* Body */
+
+.worker-body {
+
+    position: absolute;
+
+    top: 58px;
+
+    left: 13px;
+
+    width: 44px;
+
+    height: 62px;
+
+    border-radius:
+        9px 9px 5px 5px;
+
+    background:
+        linear-gradient(90deg,
+            #27373b,
+            #53666a,
+            #27373b);
+
+    border:
+        1px solid #647477;
+}
+
+
+/* Safety vest */
+
+.worker-vest {
+
+    position: absolute;
+
+    inset: 5px;
+
+    border-left:
+        7px solid rgba(255, 190, 50, .75);
+
+    border-right:
+        7px solid rgba(255, 190, 50, .75);
+
+    border-bottom:
+        3px solid rgba(255, 190, 50, .75);
+}
+
+
+/* Arms */
+
+.worker-arm {
+
+    position: absolute;
+
+    top: 63px;
+
+    width: 12px;
+
+    height: 55px;
+
+    border-radius: 8px;
+
+    background: #34474c;
+
+    transform-origin: top center;
+}
+
+
+.worker-arm-left {
+
+    left: 3px;
+
+    transform:
+        rotate(20deg);
+
+    animation:
+        armWorkLeft 1.2s ease-in-out infinite alternate;
+}
+
+
+.worker-arm-right {
+
+    right: 3px;
+
+    transform:
+        rotate(-20deg);
+
+    animation:
+        armWorkRight 1.2s ease-in-out infinite alternate;
+}
+
+
+@keyframes armWorkLeft {
+
+    from {
+        transform: rotate(20deg);
+    }
+
+    to {
+        transform: rotate(55deg);
+    }
+
+}
+
+
+@keyframes armWorkRight {
+
+    from {
+        transform: rotate(-20deg);
+    }
+
+    to {
+        transform: rotate(-55deg);
+    }
+
+}
+
+
+/* Legs */
+
+.worker-leg {
+
+    position: absolute;
+
+    top: 116px;
+
+    width: 15px;
+
+    height: 48px;
+
+    border-radius: 8px;
+
+    background: #25363b;
+
+    transform-origin: top center;
+}
+
+
+.worker-leg-left {
+
+    left: 16px;
+
+    transform:
+        rotate(5deg);
+
+}
+
+
+.worker-leg-right {
+
+    right: 16px;
+
+    transform:
+        rotate(-5deg);
+
+}
+
+
+/* Tool */
+
+.worker-tool {
+
+    position: absolute;
+
+    right: -17px;
+
+    top: 87px;
+
+    width: 42px;
+
+    height: 5px;
+
+    background: #9da7a8;
+
+    transform:
+        rotate(-42deg);
+
+    transform-origin: left center;
+
+    animation:
+        hammerWork 1.2s ease-in-out infinite alternate;
+}
+
+
+.worker-tool::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: -5px;
+
+    top: -7px;
+
+    width: 15px;
+
+    height: 16px;
+
+    border-radius: 3px;
+
+    background: #667579;
+}
+
+
+@keyframes hammerWork {
+
+    from {
+        transform: rotate(-42deg);
+    }
+
+    to {
+        transform: rotate(-78deg);
+    }
+
+}
+
+
+/* ============================================================
+   SAFETY BARRIERS
+   ============================================================ */
+
+.safety-barrier {
+
+    position: absolute;
+
+    bottom: 20%;
+
+    width: 150px;
+
+    height: 45px;
+
+    border-top:
+        5px solid #d79d27;
+
+    border-bottom:
+        5px solid #d79d27;
+
+    z-index: 7;
+
+    transform:
+        skewX(-10deg);
+
+    background:
+        repeating-linear-gradient(-45deg,
+            rgba(255, 190, 45, .14) 0,
+            rgba(255, 190, 45, .14) 10px,
+            rgba(20, 30, 34, .15) 10px,
+            rgba(20, 30, 34, .15) 20px);
+}
+
+
+.barrier-one {
+    left: 3%;
+}
+
+
+.barrier-two {
+    right: 3%;
+}
+
+
+.safety-barrier span {
+
+    position: absolute;
+
+    top: -15px;
+
+    width: 7px;
+
+    height: 75px;
+
+    background: #68787b;
+
+}
+
+
+.safety-barrier span:nth-child(1) {
+    left: 5%;
+}
+
+
+.safety-barrier span:nth-child(2) {
+    left: 48%;
+}
+
+
+.safety-barrier span:nth-child(3) {
+    right: 5%;
+}
+
+
+/* ============================================================
+   WARNING LIGHTS
+   ============================================================ */
+
+.warning-light {
+
+    position: absolute;
+
+    width: 12px;
+
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #ffb72f;
+
+    box-shadow:
+        0 0 12px rgba(255, 183, 47, .8);
+
+    animation:
+        warningBlink .8s infinite alternate;
+
+    z-index: 10;
+}
+
+
+.light-one {
+
+    left: 11%;
+
+    bottom: 27%;
+
+}
+
+
+.light-two {
+
+    right: 11%;
+
+    bottom: 27%;
+
+    animation-delay: .4s;
+
+}
+
+
+@keyframes warningBlink {
+
+    from {
+        opacity: .25;
+        box-shadow:
+            0 0 3px rgba(255, 183, 47, .2);
+    }
+
+    to {
+        opacity: 1;
+        box-shadow:
+            0 0 22px rgba(255, 183, 47, .9);
+    }
+
+}
+
+
+/* ============================================================
+   DUST
+   ============================================================ */
+
+.construction-dust {
+
+    position: absolute;
+
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(210, 200, 175, .35);
+
+    bottom: 22%;
+
+    z-index: 6;
+
+    animation:
+        dustFloat 6s linear infinite;
+}
+
+
+.dust-one {
+    left: 29%;
+    animation-delay: 0s;
+}
+
+
+.dust-two {
+    left: 36%;
+    animation-delay: 1.4s;
+}
+
+
+.dust-three {
+    left: 54%;
+    animation-delay: 2.4s;
+}
+
+
+.dust-four {
+    left: 65%;
+    animation-delay: 3.5s;
+}
+
+
+.dust-five {
+    left: 75%;
+    animation-delay: 4.4s;
+}
+
+
+@keyframes dustFloat {
+
+    0% {
+
+        transform:
+            translate(0, 20px) scale(.5);
+
+        opacity: 0;
+
+    }
+
+    25% {
+        opacity: .7;
+    }
+
+    100% {
+
+        transform:
+            translate(35px, -100px) scale(1.8);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* ============================================================
+   GROUND
+   ============================================================ */
+
+.construction-ground {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    height: 24%;
+
+    background:
+        linear-gradient(180deg,
+            #111c20,
+            #070d10);
+
+    border-top:
+        2px solid rgba(255, 177, 42, .16);
+
+    z-index: 5;
+}
+
+
+.ground-line {
+
+    position: absolute;
+
+    top: 28px;
+
+    left: -10%;
+
+    width: 120%;
+
+    height: 2px;
+
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(255, 188, 56, .22) 0,
+            rgba(255, 188, 56, .22) 70px,
+            transparent 70px,
+            transparent 130px);
+
+    animation:
+        groundMove 8s linear infinite;
+}
+
+
+@keyframes groundMove {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-130px);
+    }
+
+}
+
+
+/* ============================================================
+   VIGNETTE
+   ============================================================ */
+
+.construction-vignette {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 15;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(ellipse at center,
+            transparent 35%,
+            rgba(0, 0, 0, .25) 70%,
+            rgba(0, 0, 0, .72) 100%);
+}
+
+
+/* ============================================================
+   SCAN LINE
+   ============================================================ */
+
+.construction-scan {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    top: -10%;
+
+    height: 2px;
+
+    z-index: 16;
+
+    pointer-events: none;
+
+    background:
+        rgba(0, 210, 255, .12);
+
+    box-shadow:
+        0 0 15px rgba(0, 210, 255, .18);
+
+    animation:
+        siteScan 8s linear infinite;
+}
+
+
+@keyframes siteScan {
+
+    from {
+        top: -10%;
+    }
+
+    to {
+        top: 110%;
+    }
+
+}
+
+
+/* ============================================================
+   KEEP LOGIN CARD ABOVE EVERYTHING
+   ============================================================ */
+
+body.login-page .login-shell {
+    position: fixed !important;
+
+    inset: 0 !important;
+
+    z-index: 50 !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    pointer-events: none;
+}
+
+
+body.login-page .login-card {
+
+    pointer-events: auto;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .tower-crane {
+        left: 5%;
+        width: 70%;
+    }
+
+    .worker-left {
+        left: 5%;
+    }
+
+    .worker-right {
+        right: 5%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .site-building {
+        opacity: .55;
+    }
+
+    .tower-crane {
+        opacity: .75;
+        transform: scale(.8);
+        transform-origin: top left;
+    }
+
+    .worker-left {
+        left: 2%;
+        transform: scale(.7);
+    }
+
+    .worker-center {
+        left: 50%;
+        transform: scale(.8);
+    }
+
+    .worker-right {
+        right: 2%;
+        transform: scale(.65);
+    }
+
+}
